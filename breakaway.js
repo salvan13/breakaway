@@ -78,7 +78,10 @@ addEventListener("load", function() {
             Turtle.sound.play("hurt");
             died = true;
             setTimeout(function() {
-              message("OH NO!!", true, "YOU DIED :(");
+              message("OH NO! YOU DIED!", false, "password: " + levels[currentLevel].msg, 6000);
+              setTimeout(function() {
+                location.reload();
+              }, 6000);
             }, 2000);
           }
         }
@@ -815,7 +818,7 @@ addEventListener("load", function() {
   document.body.appendChild(menu);
 
 
-  var message = function(msg, runlev, sub, nohide) {
+  var message = function(msg, runlev, sub, nohide, time) {
   
     Turtle.pause(1);
     
@@ -829,7 +832,7 @@ addEventListener("load", function() {
         if(runlev) {
           runlevel(currentLevel);
         }
-      }, 4000);
+      }, time || 4000);
     }
     
   };
@@ -841,8 +844,7 @@ addEventListener("load", function() {
     if(e.charCode == 115 && currentLevel === -1) { //S
       runlevel(currentLevel = 0);
     }
-    if(e.charCode == 112) { //P
-      Turtle.pause(1);
+    if(!died && e.charCode == 112) { //P
       var pwd = prompt("PASSWORD") || "";
       for(var x = 1; x < levels.length; x++) {
         if(levels[x].pwd.toLowerCase() == pwd.toLowerCase()) {
@@ -851,7 +853,6 @@ addEventListener("load", function() {
         }
       }
       alert("wrong password!");
-      Turtle.pause(0);
     }
   });
   
