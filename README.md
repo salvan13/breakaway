@@ -1,3 +1,3 @@
 ***Breakaway***
 ----------------
-this game was made for the 13kjs 2013 competition
+this game was made for the js13kGames 2013 competition
